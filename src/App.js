@@ -14,7 +14,6 @@ const App = () => (
    <BrowserRouter>
        <div className="App">
            <Header user={authService.getCurrentUser()} />
-
            <Switch>
                <Route exact path="/">
                  <HomePage />
