@@ -7,7 +7,7 @@ const LoaderDiv = styled.div`
   left: 50%;
   right: 50%;
   top: 50%;
-  z-index: 99999;
+  z-index: 9999999;
 `;
 
 const PreLoader = ({active}) => {

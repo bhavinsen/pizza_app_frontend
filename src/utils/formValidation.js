@@ -33,6 +33,9 @@ export const handleChange = (event, setFunction, errors, setErrors, match = '') 
         value.length < 8 ? 'Password must be 8 characters long!' : '';
       errors.password_confirmation = value !== match ? 'Confirm password is not match with password!' : '';
       break;
+    case 'address':
+      errors.address = value.trim() === '' ? 'Required field!' : '';
+      break;
     default:
       break;
   }

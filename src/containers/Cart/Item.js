@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import {Li, Img, SpanTitle, PText} from './styled';
 
-const Item = ({item, handleRemove}) => (
+const Item = ({item, handleRemove, handleUpdate}) => (
   <Li className="collection-item avatar">
     <div className="item-img">
       <Img src={item.image} alt="" />
@@ -19,12 +19,12 @@ const Item = ({item, handleRemove}) => (
       </PText>
       <div className="add-remove">
         <Link to="/cart">
-          <i className="material-icons" onClick={() => {}}>
+          <i className="material-icons" onClick={() => handleUpdate(item.item_id, (item.quantity + 1))}>
             arrow_drop_up
           </i>
         </Link>
         <Link to="/cart">
-          <i className="material-icons" onClick={() => {}}>
+          <i className="material-icons" onClick={() => handleUpdate(item.item_id, (item.quantity - 1)) }>
             arrow_drop_down
           </i>
         </Link>

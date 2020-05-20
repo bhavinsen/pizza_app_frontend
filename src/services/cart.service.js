@@ -6,8 +6,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 class CartService {
   createCart() {
     return axios
-      .post(API_URL + 'carts', {
-        method: 'post',
+      .post(API_URL + 'carts', {} ,{
         headers: {
           Accept: 'application/json',
           'Content-Type': 'application/json',
@@ -25,13 +24,13 @@ class CartService {
   addProduct(productId) {
     const {cartKey, cartToken} = this.getCart();
     return axios
-      .post(API_URL + 'carts/' + cartToken + '/', {
+      .post(API_URL + 'carts/' + cartToken + '/',{cartKey: cartKey, productID: productId, quantity: 1} ,{
         headers: {
             Accept: 'application/json',
             'Content-Type': 'application/json',
             Authorization: authHeader(),
         },
-        body: JSON.stringify({cartKey: cartKey, productID: productId, quantity: 1}),
+        body: JSON.stringify(),
       })
       .then((response) => {
         return response.data;
@@ -49,11 +48,45 @@ class CartService {
       });
   }
 
-  removeItem() {
+  removeItem(itemId) {
+    return axios
+      .delete(API_URL + 'cartitems/' + itemId, {
+        headers: authHeader(),
+      })
+      .then((response) => {
+        return response.data;
+      });
+  }
+
+  updateItem(id, quantity) {
+    return axios.put(API_URL+'cartitems/'+id,{quantity},{
+      headers: authHeader(),
+    }).then(response => {
+      return response.data;
+    });
+  }
+
+  updateCart() {
     const {cartToken} = this.getCart();
     return axios
-      .delete(API_URL + 'cartitems/' + cartToken, {
+      .put(API_URL + 'carts/' + cartToken,{},{
         headers: authHeader(),
+      })
+      .then((response) => {
+        return response.data;
+      });
+  }
+
+  checkoutCart(name, address) {
+    const {cartKey, cartToken} = this.getCart();
+    return axios
+      .post(API_URL + 'carts/' + cartToken + '/checkout/',{cartKey: cartKey, name, address} ,{
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            Authorization: authHeader(),
+        },
+        body: JSON.stringify(),
       })
       .then((response) => {
         return response.data;

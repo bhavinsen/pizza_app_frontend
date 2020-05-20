@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ItemTotal = ({total}) => (
+const ItemTotal = ({total, onclick}) => (
   <div className="container">
       <ul className="collection">
           <li className="collection-item">
@@ -8,7 +8,7 @@ const ItemTotal = ({total}) => (
           </li>
       </ul>
       <div className="checkout">
-           <button className="waves-effect waves-light btn">Checkout</button>
+          <button className="waves-effect waves-light btn" onClick={onclick}>Checkout</button>
       </div>
   </div>
 );

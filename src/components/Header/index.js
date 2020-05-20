@@ -3,11 +3,11 @@ import React from 'react';
 import Navbar from './NavBar';
 import Logo from './Logo';
 
-const Header = () => (
+const Header = ({user}) => (
    <nav className="nav-wrapper teal">
      <div className="container">
        <Logo />
-       <Navbar />
+       <Navbar user={user} />
      </div>
    </nav>
 );

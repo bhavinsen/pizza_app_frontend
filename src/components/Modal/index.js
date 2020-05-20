@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ModalDiv = styled.div`
+export const ModalDiv = styled.div`
   z-index: 1003;
   display: block;
   opicity: 1;

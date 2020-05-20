@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Link} from 'react-router-dom';
 
 import AuthService from '../../services/auth.service';
+import CartService from '../../services/cart.service';
 import {handleChange, validateForm} from '../../utils/formValidation';
 
 import Loader from '../../components/PreLoader';
@@ -11,14 +12,20 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [errors, setErrors] = useState({email: '', password: ''});
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState(false);
 
-  const formSubmit = (event) => {
+  const formSubmit = async (event) => {
     event.preventDefault();
     if (validateForm(errors)) {
       setLoading(true);
-      AuthService.login(email, password).then((response) => {
-        console.log(response);
+      await AuthService.login(email, password).then(async (response) => {
+        if(AuthService.getCurrentUser() && (!CartService.getCart())) {
+          await CartService.updateCart().then( () => document.location.href = '/' );
+        }
         setLoading(false);
+      }).catch(error => {
+        setLoading(false)
+        setApiError(true);
       });
     }
   };
@@ -30,6 +37,9 @@ const Login = () => {
         <div className="container">
           <Loader active={loading} />
           <div className="row">
+            {
+              apiError && <p>Email or Password is invalid!</p>
+            }
             <form method="post" onSubmit={formSubmit}>
               <div className="col s12">
                 <div className="row">
