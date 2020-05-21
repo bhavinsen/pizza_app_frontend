@@ -6,6 +6,8 @@ import CartPage from './containers/Cart';
 import LoginPage from './containers/Login';
 import RegisterPage from './containers/Register';
 import SuccessPage from './containers/Success';
+import OrderPage from './containers/Order';
+
 import Header from './components/Header';
 
 import authService from './services/auth.service';
@@ -28,6 +30,7 @@ const App = () => (
                   <RegisterPage />
                </Route>
                <Route exact path="/success" component={SuccessPage} />
+               <Route exact path="/orders" component={OrderPage} />
            </Switch>
        </div>
    </BrowserRouter>

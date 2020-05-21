@@ -19,11 +19,16 @@ const Navbar = ({user}) => {
         <Link to="/">Shop</Link>
       </li>
       {user && user.access_token ? (
+        <React.Fragment>
         <Li
           onClick={logout}
         >
           Logout
         </Li>
+        <Li>
+          <Link to="/orders">My Orders</Link>
+        </Li>
+        </React.Fragment>
       ) : (
         <li>
           <Link to="/login">Login</Link>

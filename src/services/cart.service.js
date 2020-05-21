@@ -7,11 +7,7 @@ class CartService {
   createCart() {
     return axios
       .post(API_URL + 'carts', {} ,{
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          Authorization: authHeader(),
-        },
+           headers: authHeader(),
       })
       .then((response) => {
         if (response.data.cartToken) {
@@ -25,11 +21,7 @@ class CartService {
     const {cartKey} = this.getCart();
     return axios
       .post(API_URL + 'carts/add',{cartKey: cartKey, productID: productId, quantity: 1} ,{
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: authHeader(),
-        },
+        headers: authHeader(),
       })
       .then((response) => {
         return response.data;
@@ -80,12 +72,7 @@ class CartService {
     const {cartKey} = this.getCart();
     return axios
       .post(API_URL + 'carts/checkout',{cartKey: cartKey, name, address} ,{
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: authHeader(),
-        },
-        body: JSON.stringify(),
+        headers: authHeader(),
       })
       .then((response) => {
         return response.data;
