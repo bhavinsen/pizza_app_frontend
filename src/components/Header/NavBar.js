@@ -10,6 +10,7 @@ const Navbar = ({user}) => {
 
   const logout = () => {
     localStorage.removeItem('user');
+    localStorage.removeItem('cart');
     document.location.reload();
   }
   return (

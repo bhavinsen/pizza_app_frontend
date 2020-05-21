@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-
+import { Redirect } from 'react-router-dom';
 import AuthService from '../../services/auth.service';
 import {handleChange, validateForm} from '../../utils/formValidation';
+import Loader from '../../components/PreLoader';
 
 const Register = () => {
   const [name, setName] = useState();
@@ -14,25 +15,41 @@ const Register = () => {
     password: '',
     password_confirmation: '',
   });
+  const [check, setCheck] = useState(false);
+  const [redirect, setRedirect] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const formSubmit = (event) => {
+  const formSubmit = async (event) => {
     event.preventDefault();
+    if(!check) {
+      setErrors({password_confirmation: 'Required!',name: 'Required!', email: 'Required!', password: 'Required!'});
+      return;
+    }
     if (validateForm(errors)) {
-      AuthService.register(
+      setLoading(true);
+      await AuthService.register(
         name,
         email,
         password,
         password_confirmation
       ).then((response) => {
-        console.log(response);
+        setRedirect(true);
+      }).catch(error => {
+
       });
+      setLoading(false);
     }
   };
+
+  if(redirect) {
+    return <Redirect to="login" />
+  }
 
   return (
     <div className="container">
       <div className="box">
         <h5 className="center">Login</h5>
+        <Loader active={loading} />
         <div className="container">
           <div className="row">
             <form method="post" onSubmit={formSubmit}>
@@ -47,6 +64,7 @@ const Register = () => {
                       onChange={(e) =>
                         handleChange(e, setName, errors, setErrors)
                       }
+                      onBlur={() => setCheck(true)}
                     />
                     <label>Name</label>
                     {errors.name.length > 0 && (
@@ -66,6 +84,7 @@ const Register = () => {
                       onChange={(e) =>
                         handleChange(e, setEmail, errors, setErrors)
                       }
+                      onBlur={() => setCheck(true)}
                     />
                     {errors.email.length > 0 && (
                       <span className="helper-text red-text">
@@ -85,6 +104,7 @@ const Register = () => {
                       onChange={(e) =>
                         handleChange(e, setPassword, errors, setErrors)
                       }
+                      onBlur={() => setCheck(true)}
                     />
                     {errors.password.length > 0 && (
                       <span className="helper-text red-text">
@@ -110,6 +130,7 @@ const Register = () => {
                           password
                         )
                       }
+                      onBlur={() => setCheck(true)}
                     />
                     <label>Confirm Password</label>
                     {errors.password_confirmation.length > 0 && (

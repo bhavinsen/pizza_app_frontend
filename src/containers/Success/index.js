@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Success = (props) => {
- console.log("thanks => ",props);
   return (
     <div className="container">
       <div className="box">

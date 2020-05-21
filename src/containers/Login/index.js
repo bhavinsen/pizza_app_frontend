@@ -19,11 +19,14 @@ const Login = () => {
     if (validateForm(errors)) {
       setLoading(true);
       await AuthService.login(email, password).then(async (response) => {
-        if(AuthService.getCurrentUser() && (!CartService.getCart())) {
+        if(AuthService.getCurrentUser() && CartService.getCart() != null ) {
           await CartService.updateCart().then( () => document.location.href = '/' );
         }
         setLoading(false);
+        setApiError(false);
+        document.location.href= "/";
       }).catch(error => {
+        console.log(error);
         setLoading(false)
         setApiError(true);
       });
