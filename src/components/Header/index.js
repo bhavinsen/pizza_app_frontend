@@ -5,11 +5,11 @@ import Logo from './Logo';
 
 import "./navbar.scss";
 
-const Header = ({user}) => (
+const Header = ({user, currencyConvert}) => (
    <nav className="nav-wrapper teal">
      <div className="container">
        <Logo />
-       <Navbar user={user} />
+       <Navbar user={user} currencyConvert={currencyConvert} />
      </div>
    </nav>
 );

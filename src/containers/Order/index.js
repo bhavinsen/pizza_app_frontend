@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 
+import Price from '../../components/Price';
 import OrderService from '../../services/order.service';
 import Loader from '../../components/PreLoader';
 
@@ -40,7 +41,7 @@ const Order = () => {
                             <td>{(index+1)}</td>
                             <td>{order.name}</td>
                             <td>{order.transactionID}</td>
-                            <td>{order.totalPrice}$</td>
+                            <td><Price price={order.totalPrice} /></td>
                             <td>{new Date(order.created_at).toString()}</td>
                         </tr>
                     ))

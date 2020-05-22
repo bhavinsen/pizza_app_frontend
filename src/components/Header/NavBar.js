@@ -2,11 +2,13 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
+import Currency from './Currency';
+
 const Li = styled.li`
    cursor: pointer;
 `;
 
-const Navbar = ({user}) => {
+const Navbar = ({user, currencyConvert}) => {
 
   const logout = () => {
     localStorage.removeItem('user');
@@ -42,6 +44,10 @@ const Navbar = ({user}) => {
           <i className="material-icons">shopping_cart</i>
         </Link>
       </li>
+      <li>
+      <Currency currencyConvert={currencyConvert}/>
+
+        </li>
     </ul>
   );
 };

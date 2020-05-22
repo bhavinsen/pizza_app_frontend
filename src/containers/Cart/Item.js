@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 
+import Price from '../../components/Price';
 import {Li, Img, SpanTitle, PText} from './styled';
 
 const Item = ({item, handleRemove, handleUpdate}) => (
@@ -12,7 +13,7 @@ const Item = ({item, handleRemove, handleUpdate}) => (
       <SpanTitle className="title">{item.name}</SpanTitle>
       <PText>{item.detail}</PText>
       <PText>
-        <b>Price: {item.price * item.quantity}$</b>
+        <Price price={item.price * item.quantity}></Price>
       </PText>
       <PText>
         <b>Quantity: {item.quantity}</b>

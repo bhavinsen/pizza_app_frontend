@@ -1,6 +1,7 @@
 import React from 'react';
 
 import {CartTitle, CardContent} from '../../components/Card';
+import Price from '../../components/Price';
 import {CardStyle, CardActionStyle} from './styled';
 
 const Item = ({product, addToCart}) => (
@@ -11,9 +12,7 @@ const Item = ({product, addToCart}) => (
     </CartTitle>
     <CardContent>
       <p>{product.detail}</p>
-      <p>
-        <b>Price {product.price}$</b>
-      </p>
+      <Price price={product.price} />
     </CardContent>
     <CardActionStyle>
       <button onClick={addToCart} className="btn waves-effect waves-light" type="button" name="action">
